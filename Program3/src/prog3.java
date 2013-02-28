@@ -1,7 +1,7 @@
 /* Steven Elberger
  * Assignment 3
  * February 18 - February 26
- * Description:
+ * Description: Displays the sum of the maximum block of consecutive integers in an array of integers including negatives.
  */
 import java.util.Random;	// TESTING PURPOSES ONLY
 class Utilities {
