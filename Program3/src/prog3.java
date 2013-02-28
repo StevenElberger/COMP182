@@ -4,7 +4,7 @@
  * Description:
  */
 import java.util.Random;	// TESTING PURPOSES ONLY
-class prog3 {
+class Utilities {
 	
 	public static void main(String[] args) {
 		// Create a new int array with 10 elements
@@ -27,6 +27,11 @@ class prog3 {
 	
 	public static int maxBlock(int[] a, int size) {
 		return maxBlock(a,0,size-1);
+	}
+	
+	public static String myName() {
+		String name = "Steven Elberger";
+		return name;
 	}
 	
 	public static int maxBlock(int[] b, int LF, int RT) {
