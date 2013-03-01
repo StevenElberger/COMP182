@@ -34,7 +34,7 @@ class Utilities {
 		return name;
 	}
 	
-	public static int maxBlock(int[] b, int LF, int RT) {
+	private static int maxBlock(int[] b, int LF, int RT) {
 		int mid, lfMax, rtMax, result;
 		// Base cases
 		if (LF == RT-1) {
