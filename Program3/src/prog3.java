@@ -26,7 +26,11 @@ class Utilities {
 	}
 	
 	public static int maxBlock(int[] a, int size) {
-		return maxBlock(a,0,size-1);
+		int sum = 0;
+		if (size > 0) {
+			sum = maxBlock(a,0,size-1);
+		}
+		return sum;
 	}
 	
 	public static String myName() {
@@ -34,85 +38,66 @@ class Utilities {
 		return name;
 	}
 	
-	private static int maxBlock(int[] b, int LF, int RT) {
-		int mid, lfMax, rtMax, result;
+	private static int maxBlock(int[] array, int LF, int RT) {
+		int result;
 		// Base cases
 		if (LF == RT-1) {
 			// If there are only 2 elements in the array
-			if (b[LF] >= 0) {
-				if (b[RT] >= 0) {
-					return (b[LF] + b[RT]);
+			if (array[LF] >= 0) {
+				if (array[RT] >= 0) {
+					result = (array[LF] + array[RT]);
 				} else {
-					return b[LF];
+					result = array[LF];
 				}
-			} else if (b[RT] >= 0) {
-				return b[RT];
-			} else if (b[LF] >= b[RT]) {
-				return b[LF];
+			} else if (array[RT] >= 0) {
+				result = array[RT];
+			} else if (array[LF] >= array[RT]) {
+				result = array[LF];
 			} else {
-				return b[RT];
+				result = array[RT];
 			}
 		} else if (LF == RT) {
 			// If there is only 1 element in the array
-			return b[LF];
-		}
-		/* What do you do when an array is null? Throw exception instead?
-		else if (b == null) {
-			// Empty array returns 0
-			return 0;
-		}
-		*/
-		
-		// Find middle of block
-		mid = ((LF + RT) / 2);
-		
-		//-- Debugging only-- System.out.println("Section A - LF: " + LF + " | RT: " + RT + " | mid: " + mid);
-		lfMax = maxBlock(b, LF, mid-1);
-		//-- Debugging only-- System.out.println("Section B - LF: " + LF + " | RT: " + RT + " | mid: " + mid + " | lfMax: " + lfMax);
-		rtMax = maxBlock(b, mid+1, RT);
-		//-- Debugging only-- System.out.println("Section C - LF: " + LF + " | RT: " + RT + " | mid: " + mid + " | lfMax: " + lfMax + " | rtMax: " + rtMax);
-		
-		int leftMid, midRight, midMax, sum;
-		leftMid = Integer.MIN_VALUE;	// Use MIN_VALUE so that program can handle the smallest int possible
-		sum = 0;
-		// Sum from left to mid
-		for (int i = mid; i >= LF; i--) {
-			sum += b[i];
-			if (sum > leftMid) {
-				leftMid = sum;
-				if (leftMid > lfMax) {
-					lfMax = leftMid;
+			result = array[LF];
+		} else {
+			int midMax, sum, mid, lfMax, rtMax;
+			// Find middle of block
+			mid = ((LF + RT) / 2);
+			
+			lfMax = maxBlock(array, LF, mid-1);
+			rtMax = maxBlock(array, mid+1, RT);
+			
+			sum = 0;
+			// Sum from left to mid
+			for (int i = mid; i >= LF; i--) {
+				sum += array[i];
+				if (sum > lfMax) {
+					lfMax = sum;
 				}
 			}
-		}
-		midRight = Integer.MIN_VALUE;
-		sum = 0;
-		// Sum from mid to right
-		for (int j = mid+1; j <= RT; j++) {
-			sum += b[j];
-			if (sum > midRight) {
-				midRight = sum;
-				if (midRight > rtMax) {
-					rtMax = midRight;
+			sum = 0;
+			// Sum from mid to right
+			for (int j = mid+1; j <= RT; j++) {
+				sum += array[j];
+				if (sum > rtMax) {
+					rtMax = sum;
 				}
 			}
-		}
-		// Largest sum spanning whole array
-		midMax = leftMid + midRight;
-		//-- Debugging only-- System.out.println("Section D - lfMax: " + lfMax + " | rtMax: " + rtMax + " | midMax: " + midMax);
-		result = 0; // compiler needs to be happy
-		// Return the largest sum
-		if (lfMax >= rtMax) {
-			if (lfMax >= midMax) {
-				result = lfMax;
+			// Largest sum spanning whole array
+			midMax = lfMax + rtMax;	// midMax = leftMid + midRight;
+			// Return the largest sum
+			if (lfMax >= rtMax) {
+				if (lfMax >= midMax) {
+					result = lfMax;
+				} else {
+					result = midMax;
+				}
+			} else if (rtMax >= midMax) {
+				result = rtMax;
 			} else {
 				result = midMax;
 			}
-		} else if (rtMax >= midMax) {
-			result = rtMax;
-		} else {
-			result = midMax;
 		}
-		return result;	// return Math.max(lfMax, Math.max(rtMax,midMax))
+		return result;
 	}
 }
