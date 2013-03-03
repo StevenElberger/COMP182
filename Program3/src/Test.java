@@ -5,6 +5,7 @@ public class Test {
     private static int max = 100;
 
     public static void main(String[] args) throws IOException  {
+    	Utilities.main(args);
         InputStream input_data = new FileInputStream("C:/Users/Steve/workspace/COMP182/Program3/Data.txt");
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(input_data));
@@ -19,6 +20,7 @@ public class Test {
         }
         System.out.println();
         System.out.println("Test run complete.");
+        
      }
     
     public static int input(int[] a, int max, BufferedReader in) throws IOException {

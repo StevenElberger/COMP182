@@ -67,24 +67,32 @@ class Utilities {
 			lfMax = maxBlock(array, LF, mid-1);
 			rtMax = maxBlock(array, mid+1, RT);
 			
+			Integer lfSum = null;
 			sum = 0;
 			// Sum from left to mid
 			for (int i = mid; i >= LF; i--) {
 				sum += array[i];
-				if (sum > lfMax) {
-					lfMax = sum;
+				if (lfSum == null || (lfSum != null && sum > lfSum.intValue())) {
+					lfSum = sum;
+					if (lfSum > lfMax) {
+						lfMax = lfSum;
+					}
 				}
 			}
+			Integer rtSum = null;
 			sum = 0;
 			// Sum from mid to right
 			for (int j = mid+1; j <= RT; j++) {
 				sum += array[j];
-				if (sum > rtMax) {
-					rtMax = sum;
+				if (rtSum == null || (rtSum != null && sum > rtSum.intValue())) {
+					rtSum = sum;
+					if (rtSum > rtMax) {
+						rtMax = rtSum;
+					}
 				}
 			}
 			// Largest sum spanning whole array
-			midMax = lfMax + rtMax;	// midMax = leftMid + midRight;
+			midMax = lfSum + rtSum;	// midMax = leftMid + midRight;
 			// Return the largest sum
 			if (lfMax >= rtMax) {
 				if (lfMax >= midMax) {
