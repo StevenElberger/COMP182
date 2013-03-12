@@ -1,3 +1,10 @@
+/* Steven Elberger
+ * Assignment 4
+ * March 11 - March 21
+ * Description: CharacterNode is a node class which holds a char and another node.
+ * MyString is a list class which holds CharacterNodes. Populate MyString with CharacterNodes 
+ * to create a linked list.
+ */
 class CharacterNode {
 	private char letter;
 	private CharacterNode next;
