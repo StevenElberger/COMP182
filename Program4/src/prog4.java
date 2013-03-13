@@ -41,7 +41,14 @@ class MyString {
 
 	// copy constructor
 	public MyString(MyString l) {
-		
+		CharacterNode pt = l.head;
+		if (pt == null) {
+		} else {
+			while (pt != null) {
+				this.addTail(pt.getCharacter());
+				pt = pt.getNext();
+			}
+		}
 	}
 
 	// constructor from a String
@@ -56,7 +63,7 @@ class MyString {
 	}
 
 	// for output purposes -- override Object version
-	// no spaces between the characters, no linefeeds/returns
+	// no spaces between the characters, no line feeds/returns
 	public String toString() {
 		String result = "";
 		CharacterNode pt = head;
@@ -88,6 +95,7 @@ class MyString {
 
 	// modify the list so it is reversed
 	public void reverse() {
+		// Figure this out! Make this recursive!
 	}
 
 	// remove all occurrences of the character from the list
@@ -98,8 +106,8 @@ class MyString {
 	private static CharacterNode removeChar(CharacterNode n, char letter) {
 		if (n == null) {
 		} else if (n.getCharacter() == letter) {
-			n = n.getNext();
 			n.setNext(removeChar(n.getNext(),letter));
+			n = n.getNext();
 		} else {
 			n.setNext(removeChar(n.getNext(),letter));
 		}
@@ -122,6 +130,15 @@ class MyString {
 
 	// concatenate a copy of list1 to the end of the list
 	public void concat(MyString list1) {
+		concat(list1.head);
+	}
+	
+	private static CharacterNode concat(CharacterNode n) {
+		if (n == null) {
+		} else {
+			// Figure this out!
+		}
+		return n;
 	}
 
 	// who are you?
