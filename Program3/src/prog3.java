@@ -3,26 +3,12 @@
  * February 18 - February 26
  * Description: Displays the sum of the maximum block of consecutive integers in an array of integers including negatives.
  */
-import java.util.Random;	// TESTING PURPOSES ONLY
+
 class Utilities {
 	
-	public static void main(String[] args) {
-		// Create a new int array with 10 elements
-		// only load the array up to its size
-		int max = 50;
-		int size = 3;
-		int[] arrayInt = new int[max];
-		
-		// Populate the array with random ints
-		// with values -10 to 10
-		Random rand = new Random();
-		for (int i = 0; i < size; i++) {
-			arrayInt[i] = (int) (rand.nextInt(20)-10);
-			System.out.print(arrayInt[i] + " ");
-		}
-		
-		System.out.println();
-		System.out.println("Result: " + maxBlock(arrayInt,3));
+	public static String myName() {
+		String name = "Steven Elberger";
+		return name;
 	}
 	
 	public static int maxBlock(int[] a, int size) {
@@ -31,11 +17,6 @@ class Utilities {
 			sum = maxBlock(a,0,size-1);
 		}
 		return sum;
-	}
-	
-	public static String myName() {
-		String name = "Steven Elberger";
-		return name;
 	}
 	
 	private static int maxBlock(int[] array, int LF, int RT) {
