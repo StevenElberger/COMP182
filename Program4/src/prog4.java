@@ -15,7 +15,7 @@ class CharacterNode {
 	}
 
 	public void setCharacter(char ch) {
-		letter = ch;
+		this.letter = ch;
 	}
 
 	public char getCharacter() {
@@ -130,15 +130,30 @@ class MyString {
 
 	// concatenate a copy of list1 to the end of the list
 	public void concat(MyString list1) {
-		concat(list1.head);
+		CharacterNode tail = null, pt = list1.head;
+		if (pt == null) {
+		} else if (pt.getNext() == null) {
+			tail = pt;
+		} else {
+			while (pt.getNext() != null) {
+				pt = pt.getNext();
+			}
+			tail = pt;
+		}
+		list1.head = concat(list1.head, tail);
 	}
 	
-	private static CharacterNode concat(CharacterNode n) {
-		if (n == null) {
+	private static CharacterNode concat(CharacterNode lhead, CharacterNode tail) {
+		CharacterNode thehead = lhead;
+		if (tail == null || thehead == null) {
+		} else if (tail.getNext() == thehead) {
 		} else {
-			// Figure this out!
+			thehead = thehead.getNext();
+			CharacterNode next = new CharacterNode(thehead.getCharacter(),null);
+			tail.setNext(concat(next,tail));
+			//lhead = thehead;
 		}
-		return n;
+		return lhead;
 	}
 
 	// who are you?

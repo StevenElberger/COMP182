@@ -15,5 +15,7 @@ public class Test {
 		list.removeChar('l');
 		System.out.println("List: " + list);
 		System.out.println("List2: " + list2);
+		list.concat(list);
+		System.out.println(list);
 	}
 }
