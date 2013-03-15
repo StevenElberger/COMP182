@@ -143,15 +143,13 @@ class MyString {
 		list1.head = concat(list1.head, tail);
 	}
 	
-	private static CharacterNode concat(CharacterNode lhead, CharacterNode tail) {
-		CharacterNode thehead = lhead;
-		if (tail == null || thehead == null) {
-		} else if (tail.getNext() == thehead) {
+	private static CharacterNode concat(CharacterNode lhead, CharacterNode tail) {		
+		CharacterNode pt = lhead;
+		if (tail.getNext() == lhead) {
+		} else if (lhead == null) {
+			lhead = new CharacterNode(pt.getCharacter(),null);
 		} else {
-			thehead = thehead.getNext();
-			CharacterNode next = new CharacterNode(thehead.getCharacter(),null);
-			tail.setNext(concat(next,tail));
-			//lhead = thehead;
+			lhead.setNext(concat(lhead.getNext(),tail));
 		}
 		return lhead;
 	}
