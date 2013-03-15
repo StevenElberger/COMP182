@@ -141,24 +141,26 @@ class MyString {
 			}
 			tail = pt;
 		}
-		list1.head = concat(list1.head, tail);
+		list1.head = concat(list1.head, tail, list1.head);
 	}
 	
-	private static CharacterNode concat(CharacterNode lhead, CharacterNode tail) {
+	private static CharacterNode concat(CharacterNode lhead, CharacterNode tail, CharacterNode pt) {
 		// Pass in smaller list every time
 		// Head traverses down list till the end
 		// Add new node with pt's letter, null
-		CharacterNode pt = lhead;
+		//CharacterNode pt = lhead;
 		// Might need to make this a 3 parameter method - pass in pt
 		// If head is past tail, we're done!
-		if (tail.getNext() == lhead) {
+		if (lhead == null) {
 		// If head is null, we need to add the node
-		} else if (lhead == null) {
+			System.out.println(pt.getCharacter());
 			lhead = new CharacterNode(pt.getCharacter(),null);
+		} else if (tail.getNext() == lhead) {
+			System.out.println("here");
 		// Call concat on a smaller list! Pt must advance	
 		} else {
 			//pt = pt.getNext();
-			lhead.setNext(concat(lhead.getNext(),tail));
+			lhead.setNext(concat(lhead.getNext(),tail,pt));
 		}
 		return lhead;
 	}
