@@ -131,6 +131,7 @@ class MyString {
 	// concatenate a copy of list1 to the end of the list
 	public void concat(MyString list1) {
 		CharacterNode tail = null, pt = list1.head;
+		// Find the tail of the list
 		if (pt == null) {
 		} else if (pt.getNext() == null) {
 			tail = pt;
@@ -143,12 +144,20 @@ class MyString {
 		list1.head = concat(list1.head, tail);
 	}
 	
-	private static CharacterNode concat(CharacterNode lhead, CharacterNode tail) {		
+	private static CharacterNode concat(CharacterNode lhead, CharacterNode tail) {
+		// Pass in smaller list every time
+		// Head traverses down list till the end
+		// Add new node with pt's letter, null
 		CharacterNode pt = lhead;
+		// Might need to make this a 3 parameter method - pass in pt
+		// If head is past tail, we're done!
 		if (tail.getNext() == lhead) {
+		// If head is null, we need to add the node
 		} else if (lhead == null) {
 			lhead = new CharacterNode(pt.getCharacter(),null);
+		// Call concat on a smaller list! Pt must advance	
 		} else {
+			//pt = pt.getNext();
 			lhead.setNext(concat(lhead.getNext(),tail));
 		}
 		return lhead;
