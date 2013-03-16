@@ -130,37 +130,15 @@ class MyString {
 
 	// concatenate a copy of list1 to the end of the list
 	public void concat(MyString list1) {
-		CharacterNode tail = null, pt = list1.head;
-		// Find the tail of the list
-		if (pt == null) {
-		} else if (pt.getNext() == null) {
-			tail = pt;
-		} else {
-			while (pt.getNext() != null) {
-				pt = pt.getNext();
-			}
-			tail = pt;
-		}
-		list1.head = concat(list1.head, tail, list1.head);
+		MyString newlist = new MyString(list1);
+		head = concat(head,newlist.head);
 	}
 	
-	private static CharacterNode concat(CharacterNode lhead, CharacterNode tail, CharacterNode pt) {
-		// Pass in smaller list every time
-		// Head traverses down list till the end
-		// Add new node with pt's letter, null
-		//CharacterNode pt = lhead;
-		// Might need to make this a 3 parameter method - pass in pt
-		// If head is past tail, we're done!
-		if (lhead == null) {
-		// If head is null, we need to add the node
-			System.out.println(pt.getCharacter());
-			lhead = new CharacterNode(pt.getCharacter(),null);
-		} else if (tail.getNext() == lhead) {
-			System.out.println("here");
-		// Call concat on a smaller list! Pt must advance	
+	private static CharacterNode concat(CharacterNode lhead, CharacterNode headtail) {
+		if (lhead.getNext() == null) {
+			lhead.setNext(headtail);
 		} else {
-			//pt = pt.getNext();
-			lhead.setNext(concat(lhead.getNext(),tail,pt));
+			lhead.setNext(concat(lhead.getNext(),headtail));
 		}
 		return lhead;
 	}
