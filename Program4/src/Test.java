@@ -17,5 +17,7 @@ public class Test {
 		System.out.println("List2: " + list2);
 		list.concat(list);
 		System.out.println(list);
+		list.reverse();
+		System.out.println(list);
 	}
 }
