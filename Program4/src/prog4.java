@@ -41,44 +41,54 @@ class MyString {
 
 	// copy constructor
 	public MyString(MyString l) {
-		// Till we hit a null node, add the node's value
-		// To the tail of this list
-		CharacterNode pt = l.head;
-		if (pt == null) {
-		} else {
-			while (pt != null) {
-				this.addTail(pt.getCharacter());
-				pt = pt.getNext();
-			}
-		}
+		head = copylist(head,l.head);
 	}
 
 	// constructor from a String
 	public MyString(String s) {
-		// Iterate backwards through the string
-		// Add each letter to the head of the list
-		for (int i = s.length() - 1; i >= 0; i--) {
-			if (i == s.length() - 1) {
-				head = new CharacterNode(s.charAt(i),null);
-			} else {
-				head = new CharacterNode(s.charAt(i),head);
-			}
-		}
+		head = copystring(s,head);
 	}
-
-	// for output purposes -- override Object version
-	// no spaces between the characters, no line feeds/returns
+	
 	public String toString() {
-		// Till we hit a null node, add the character to result
+		return toString(head);
+	}
+	
+	// Take String value of head's character
+	// Add it to the rest of the list's values
+	private static String toString(CharacterNode lhead) {
 		String result = "";
-		CharacterNode pt = head;
-		while (pt != null) {
-			result += String.valueOf(pt.getCharacter());
-			pt = pt.getNext();
+		if (lhead == null) {
+		} else {
+			result = String.valueOf(lhead.getCharacter()) + toString(lhead.getNext());
 		}
 		return result;
 	}
-
+	
+	// If the string has only one character left, stop recursive calls
+	// Otherwise, set head's character equal to the first char in s
+	// Then, set its next equal to the rest of the list
+	private CharacterNode copystring(String s, CharacterNode lhead) {
+		if (s.length() < 1) {
+		} else if (s.length() == 1) {
+			lhead = new CharacterNode(s.charAt(0),null);
+		} else {
+			lhead = new CharacterNode(s.charAt(0),null);
+			lhead.setNext(copystring(s.substring(1,s.length()),lhead.getNext()));
+		}
+		return lhead;
+	}
+	
+	// Take the character from the parameter head and add it to this list's head
+	// Link head up to the rest of this list
+	private CharacterNode copylist(CharacterNode lhead, CharacterNode paramlhead) {
+		if (paramlhead == null) {
+		} else {
+			lhead = new CharacterNode(paramlhead.getCharacter(),null);
+			lhead.setNext(copylist(lhead.getNext(),paramlhead.getNext()));
+		}
+		return lhead;
+	}
+	
 	// create a new node and add it to the head of the list
 	public void addHead(char ch) {
 		// Head is now a new node with its old value as its next
