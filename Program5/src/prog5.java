@@ -64,8 +64,8 @@ class BSTStrings {
         }
         public static StringNode insert(String str, StringNode troot) {
                 if (troot == null) {
+                		// empty node, make it new
                         troot = new StringNode(str,null,null);
-                        //System.out.println(troot.getString());
                 } else if(str.compareTo(troot.getString()) > 0) {
                         // string is greater than, go right!
                         troot.setRight(insert(str,troot.getRight()));
@@ -80,7 +80,16 @@ class BSTStrings {
         public void delete(String s) {
         }
         public int height() {
-                return 0;
+        	return height(root);
+        }
+        
+        public static int height(StringNode troot) {
+        	int result = 0; // compiler!
+        	if (troot == null) {
+        	} else {
+        		result += height(troot.getLeft()) + 1 + height(troot.getRight());
+        	}
+        	return result;
         }
         public int leafCt() {
                 return 0;
