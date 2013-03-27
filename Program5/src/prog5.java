@@ -91,6 +91,15 @@ class BSTStrings {
                 return troot;
         }
         public void delete(String s) {
+        	delete(root,s);
+        }
+        
+        private static void delete(StringNode troot, String str) {
+        	// Super-annoyingly difficult!
+        	// Check notes from class
+        	if (troot == null) {
+        	} else if (troot.getString().equals(str)) {
+        	}
         }
         public int height() {
         	return height(root);
@@ -105,7 +114,19 @@ class BSTStrings {
         	return result;
         }
         public int leafCt() {
-                return 0;
+                return leafCt(root);
+        }
+        
+        private static int leafCt(StringNode troot) {
+        	int result = 0;
+        	if (troot == null) {
+        	} else if (troot.getLeft() == null && troot.getRight() == null) {
+        		result = 1;
+        	} else {
+        		result = leafCt(troot.getLeft());
+        		result += leafCt(troot.getRight());
+        	}
+        	return result;
         }
          public int closeLeaf() {
                  return 0;

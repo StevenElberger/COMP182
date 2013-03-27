@@ -8,5 +8,10 @@ public class Test {
 		System.out.println(bstree.search("world"));
 		System.out.println(bstree.search("abba"));
 		System.out.println(bstree.search("Hello"));
+		System.out.println(bstree.leafCt());
+		bstree.insert("Abc");
+		bstree.insert("zebra");
+		System.out.println(bstree);
+		System.out.println(bstree.leafCt());
 	}
 }
