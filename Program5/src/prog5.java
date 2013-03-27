@@ -57,7 +57,20 @@ class BSTStrings {
                 return s;
         }
         public boolean search(String s) {
-                return false;
+                return search(root,s);
+        }
+        
+        public static boolean search(StringNode troot, String str) {
+        	boolean result = false;
+        	if (troot == null) {
+        	} else if (troot.getString().equals(str)) {
+        		result = true;
+        	} else if (str.compareTo(troot.getString()) > 0) {
+        		result = search(troot.getRight(),str);
+        	} else {
+        		result = search(troot.getLeft(),str);
+        	}
+        	return result;
         }
         public void insert(String s) {
                 root = insert(s,root);
