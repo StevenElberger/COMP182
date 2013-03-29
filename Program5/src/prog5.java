@@ -104,24 +104,36 @@ class BSTStrings {
         	// Super-annoyingly difficult!
         	// Check notes from class
         	if (troot == null) {
+        		System.out.println("Root is null");
         	} else if (troot.getString().equals(str)) {
         		if (troot.getLeft() == null && troot.getRight() != null) {
-        			troot.setRight(troot.getRight());
+        			//System.out.println("Left is null, right is not null.");
+        			troot = troot.getRight();
         			//troot = troot.getRight();
         		} else if (troot.getRight() == null && troot.getLeft() != null) {
-        			troot.setLeft(troot.getLeft());
+        			//System.out.println("Right is null, left is not null.");
+        			troot = troot.getLeft();
+        			//troot.setLeft(troot.getLeft().getLeft());
         			//troot = troot.getLeft();
         		} else if (troot.getRight() == null && troot.getLeft() == null) {
+        			//System.out.println("Right is null, left is null");
         			troot = null;
         		} else {
+        			//System.out.println("Left is not null, right is not null.");
         			StringNode replacement = new StringNode(findLargest(troot).getString(),findLargest(troot).getLeft(),troot.getRight());
-        			troot.getLeft().setRight(replacement.getLeft());        			
-        			troot = replacement;
+        			StringNode abc = troot.getLeft();
+        			abc = replacement.getLeft();
+        			troot = abc;
+        			//troot.getLeft() = replacement.getLeft();
+        			//troot.getLeft().setRight(replacement.getLeft());        			
+        			//troot = replacement;
         		}
         	} else if (str.compareTo(troot.getString()) > 0) {
+        		//System.out.println("Root doesn't contain str, going right!");
         		troot.setRight(delete(troot.getRight(),str));
         		//troot = delete(troot.getRight(), str);
         	} else {
+        		//System.out.println("Root doesn't contain str, going left!");
         		troot.setLeft(delete(troot.getLeft(),str));
         		//troot = delete(troot.getLeft(), str);
         	}
