@@ -35,7 +35,13 @@ class BSTStrings {
                 root = copyTree(t.root);
         }
         private static StringNode copyTree(StringNode l) {
-                return l;
+        		StringNode result;
+        		if (l == null) {
+        			result = null;
+        		} else {
+        			result = new StringNode(l.getString(),copyTree(l.getLeft()),copyTree(l.getRight()));
+        		}
+                return result;
         }
         // for output purposes -- override Object version
         public String toString() {

@@ -13,5 +13,7 @@ public class Test {
 		bstree.insert("zebra");
 		System.out.println(bstree);
 		System.out.println(bstree.leafCt());
+		BSTStrings bstree2 = new BSTStrings(bstree);
+		System.out.println(bstree2);
 	}
 }
