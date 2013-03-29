@@ -15,5 +15,6 @@ public class Test {
 		System.out.println(bstree.leafCt());
 		BSTStrings bstree2 = new BSTStrings(bstree);
 		System.out.println(bstree2);
+		System.out.println(bstree.closeLeaf());
 	}
 }

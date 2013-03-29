@@ -135,7 +135,25 @@ class BSTStrings {
         	return result;
         }
          public int closeLeaf() {
-                 return 0;
+                 return closeLeaf(root);
+         }
+         
+         private static int closeLeaf(StringNode troot) {
+        	 int result;
+        	 if (troot == null) {
+        		 result = 0;
+        	 } else if (troot.getLeft() == null && troot.getRight() == null) {
+        		 result = 1;
+        	 } else {
+        		 int lf = closeLeaf(troot.getLeft()) + 1;
+        		 int rt = closeLeaf(troot.getRight()) + 1;
+        		 if (lf < rt) {
+        			 result = lf;
+        		 } else {
+        			 result = rt;
+        		 }
+        	 }
+        	 return result;
          }
         // Rotate the node containing val to the left – do nothing if not
         // possible, e.g., val is not in the tree or there is no right child
