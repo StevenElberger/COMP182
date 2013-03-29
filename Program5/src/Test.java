@@ -16,5 +16,9 @@ public class Test {
 		BSTStrings bstree2 = new BSTStrings(bstree);
 		System.out.println(bstree2);
 		System.out.println(bstree.closeLeaf());
+		bstree.delete("zebra");
+		System.out.println(bstree);
+		bstree.delete("Abc");
+		System.out.println(bstree);
 	}
 }

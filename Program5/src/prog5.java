@@ -97,15 +97,44 @@ class BSTStrings {
                 return troot;
         }
         public void delete(String s) {
-        	delete(root,s);
+        	root = delete(root,s);
         }
         
-        private static void delete(StringNode troot, String str) {
+        private static StringNode delete(StringNode troot, String str) {
         	// Super-annoyingly difficult!
         	// Check notes from class
         	if (troot == null) {
         	} else if (troot.getString().equals(str)) {
+        		if (troot.getLeft() == null && troot.getRight() != null) {
+        			troot.setRight(troot.getRight());
+        			//troot = troot.getRight();
+        		} else if (troot.getRight() == null && troot.getLeft() != null) {
+        			troot.setLeft(troot.getLeft());
+        			//troot = troot.getLeft();
+        		} else if (troot.getRight() == null && troot.getLeft() == null) {
+        			troot = null;
+        		} else {
+        			StringNode replacement = new StringNode(findLargest(troot).getString(),findLargest(troot).getLeft(),troot.getRight());
+        			troot.getLeft().setRight(replacement.getLeft());        			
+        			troot = replacement;
+        		}
+        	} else if (str.compareTo(troot.getString()) > 0) {
+        		troot.setRight(delete(troot.getRight(),str));
+        		//troot = delete(troot.getRight(), str);
+        	} else {
+        		troot.setLeft(delete(troot.getLeft(),str));
+        		//troot = delete(troot.getLeft(), str);
         	}
+        	return troot;
+        }
+        
+        private static StringNode findLargest(StringNode troot) {
+        	if (troot == null) {
+        	} else if (troot.getRight() == null) {
+        	} else {
+        		troot = findLargest(troot.getRight());
+        	}
+        	return troot;
         }
         public int height() {
         	return height(root);
