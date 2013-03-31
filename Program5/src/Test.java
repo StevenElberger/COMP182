@@ -29,6 +29,23 @@ public class Test {
 		System.out.println(bstree);
 		bstree.delete("Abc");
 		System.out.println(bstree);
+		bstree.insert("zebra1");
+		System.out.println(bstree);
+		bstree.insert("zebra0");
+		System.out.println(bstree);
+		bstree.delete("zebra");
+		System.out.println(bstree);
+		bstree.insert("ABC");
+		System.out.println(bstree);
+		bstree.insert("ABC1");
+		bstree.insert("AB");
+		System.out.println(bstree);
+		bstree.delete("ABC");
+		System.out.println(bstree);
+		bstree.insert("zebra2");
+		System.out.println(bstree);
+		bstree.delete("zebra1");
+		System.out.println(bstree);
 		
 	}
 }

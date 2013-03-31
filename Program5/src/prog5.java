@@ -120,13 +120,16 @@ class BSTStrings {
         			troot = null;
         		} else {
         			//System.out.println("Left is not null, right is not null.");
-        			StringNode replacement = new StringNode(findLargest(troot).getString(),findLargest(troot).getLeft(),troot.getRight());
-        			StringNode abc = troot.getLeft();
-        			abc = replacement.getLeft();
-        			troot = abc;
-        			//troot.getLeft() = replacement.getLeft();
-        			//troot.getLeft().setRight(replacement.getLeft());        			
-        			//troot = replacement;
+        			/*
+        			 * THIS NEEDS WORK -- Only part in delete that doesn't work at the moment.
+        			 */
+        			//System.out.println("Both children");
+        			StringNode replacement1 = findLargest(troot);
+        			//System.out.println("Right before we set left");
+        			replacement1.setLeft(troot.getLeft());
+        			//System.out.println("Right before we set right");
+        			replacement1.setRight(troot.getRight());
+        			troot = replacement1;
         		}
         	} else if (str.compareTo(troot.getString()) > 0) {
         		//System.out.println("Root doesn't contain str, going right!");
@@ -141,12 +144,17 @@ class BSTStrings {
         }
         
         private static StringNode findLargest(StringNode troot) {
-        	if (troot == null) {
-        	} else if (troot.getRight() == null) {
-        	} else {
-        		troot = findLargest(troot.getRight());
+        	StringNode result = null;
+        	if (troot.getRight().getLeft() == null && troot.getRight().getRight() == null) {
+        		result = troot.getRight();
+        		troot.setRight(null);
+        	} else if (troot.getRight().getLeft() != null && troot.getRight().getRight() == null) {
+        		result = troot.getRight();
+        		troot.setRight(troot.getRight().getLeft());
+        	} else {//if (troot.getRight().getLeft() == null && troot.getRight().getRight() != null) {
+        		findLargest(troot.getRight());
         	}
-        	return troot;
+        	return result;
         }
         public int height() {
         	return height(root);
