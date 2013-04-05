@@ -1,51 +1,18 @@
 public class Test {
 	public static void main(String[] args) {
 		BSTStrings bstree = new BSTStrings();
-		/*bstree.insert("A");
-		bstree.insert("B");
-		bstree.insert("C");
+		bstree.insert("N");
+		System.out.println(bstree);
 		bstree.insert("D");
+		System.out.println(bstree);
+		bstree.insert("F");
+		System.out.println(bstree);
 		bstree.insert("E");
 		System.out.println(bstree);
-		bstree.delete("D");
+		bstree.insert("G");
 		System.out.println(bstree);
-		*/
-		bstree.insert("Hello");
-		bstree.insert("world");
+		bstree.insert("A");
 		System.out.println(bstree);
-		System.out.println(bstree.height());
-		System.out.println(bstree.search("world"));
-		System.out.println(bstree.search("abba"));
-		System.out.println(bstree.search("Hello"));
-		System.out.println(bstree.leafCt());
-		bstree.insert("Abc");
-		bstree.insert("zebra");
-		System.out.println(bstree);
-		System.out.println(bstree.leafCt());
-		BSTStrings bstree2 = new BSTStrings(bstree);
-		System.out.println(bstree2);
 		System.out.println(bstree.closeLeaf());
-		bstree.delete("world");
-		System.out.println(bstree);
-		bstree.delete("Abc");
-		System.out.println(bstree);
-		bstree.insert("zebra1");
-		System.out.println(bstree);
-		bstree.insert("zebra0");
-		System.out.println(bstree);
-		bstree.delete("zebra");
-		System.out.println(bstree);
-		bstree.insert("ABC");
-		System.out.println(bstree);
-		bstree.insert("ABC1");
-		bstree.insert("AB");
-		System.out.println(bstree);
-		bstree.delete("ABC");
-		System.out.println(bstree);
-		bstree.insert("zebra2");
-		System.out.println(bstree);
-		bstree.delete("zebra1");
-		System.out.println(bstree);
-		
 	}
 }

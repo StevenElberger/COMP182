@@ -194,12 +194,21 @@ class BSTStrings {
         	 } else if (troot.getLeft() == null && troot.getRight() == null) {
         		 result = 1;
         	 } else {
-        		 int lf = closeLeaf(troot.getLeft()) + 1;
-        		 int rt = closeLeaf(troot.getRight()) + 1;
-        		 if (lf < rt) {
-        			 result = lf;
+        		 int lf = closeLeaf(troot.getLeft());
+        		 int rt = closeLeaf(troot.getRight());
+        		 
+        		 if (lf > 0 && rt > 0) {
+        			 if (lf < rt) {
+        				 result = lf + 1;
+        			 } else {
+        				 result = rt + 1;
+        			 }
+        		 } else if (lf > 0 && rt == 0) {
+        			 result = lf + 1;
+        		 } else if (rt > 0 && lf == 0) {
+        			 result = rt + 1;
         		 } else {
-        			 result = rt;
+        			 result = 0;
         		 }
         	 }
         	 return result;
