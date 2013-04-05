@@ -14,5 +14,10 @@ public class Test {
 		System.out.println(bstree.closeLeaf());
 		System.out.println(bstree.leafCt());
 		System.out.println(bstree.height());
+		bstree.delete("F");
+		System.out.println(bstree);
+		System.out.println(bstree.search("G"));
+		bstree.rotateLeft("D");
+		System.out.println(bstree);
 	}
 }

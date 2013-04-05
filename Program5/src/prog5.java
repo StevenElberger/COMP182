@@ -161,7 +161,7 @@ class BSTStrings {
         }
         
         public static int height(StringNode troot) {
-        	int result; // compiler!
+        	int result;
         	if (troot == null) {
         		result = 0;
         	} else if (troot.getLeft() == null && troot.getRight() == null) {
@@ -193,7 +193,7 @@ class BSTStrings {
         	return result;
         }
          public int closeLeaf() {
-                 return closeLeaf(root);
+        	 return closeLeaf(root);
          }
          
          private static int closeLeaf(StringNode troot) {
@@ -221,11 +221,43 @@ class BSTStrings {
         	 }
         	 return result;
          }
+         
         // Rotate the node containing val to the left – do nothing if not
         // possible, e.g., val is not in the tree or there is no right child
         // of val.
         public void rotateLeft(String s) {
+        	root = rotateLeft(root, s);
         }
+        
+        private static StringNode rotateLeft(StringNode troot, String str) {
+        	if (troot == null) {
+        	} else if (troot.getString().equals(str)) {
+        		StringNode replacement = new StringNode(troot.getString(),troot.getLeft(),null);
+        		StringNode replacement2 = findSmallest(troot.getRight());
+        		if (replacement2 != null) {	// if troot.getRight() isn't null, set its left to troot
+        			troot = troot.getRight();
+        			replacement2.setLeft(replacement);
+        		}
+        	} else if (str.compareTo(troot.getString()) > 0) {
+        		troot.setRight(rotateLeft(troot.getRight(),str));	
+        	} else {
+        		troot.setLeft(rotateLeft(troot.getLeft(),str));
+        	}
+        	return troot;
+        }
+        
+        private static StringNode findSmallest(StringNode troot) {
+        	StringNode result;
+        	if (troot == null) {
+        		result = null;
+        	} else if (troot.getLeft() == null) {
+        		result = troot;
+        	} else {
+        		result = findSmallest(troot.getLeft());
+        	}
+        	return result;
+        }
+        
         // Rotate the node containing val to the right – do nothing if not
         // possible.
         public void rotateRight(String s) {
