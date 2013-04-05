@@ -161,10 +161,19 @@ class BSTStrings {
         }
         
         public static int height(StringNode troot) {
-        	int result = 0; // compiler!
+        	int result; // compiler!
         	if (troot == null) {
+        		result = 0;
+        	} else if (troot.getLeft() == null && troot.getRight() == null) {
+        		result = 1;
         	} else {
-        		result += height(troot.getLeft()) + 1 + height(troot.getRight());
+        		int lf = height(troot.getLeft());
+        		int rt = height(troot.getRight());
+        		if (lf > rt) {
+        			result = lf + 1;
+        		} else {
+        			result = rt + 1;
+        		}
         	}
         	return result;
         }
@@ -196,7 +205,6 @@ class BSTStrings {
         	 } else {
         		 int lf = closeLeaf(troot.getLeft());
         		 int rt = closeLeaf(troot.getRight());
-        		 
         		 if (lf > 0 && rt > 0) {
         			 if (lf < rt) {
         				 result = lf + 1;
