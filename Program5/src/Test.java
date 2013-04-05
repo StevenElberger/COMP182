@@ -17,7 +17,9 @@ public class Test {
 		bstree.delete("F");
 		System.out.println(bstree);
 		System.out.println(bstree.search("G"));
-		bstree.rotateLeft("D");
+		bstree.insert("A");
+		System.out.println(bstree);
+		bstree.rotateRight("D");
 		System.out.println(bstree);
 	}
 }

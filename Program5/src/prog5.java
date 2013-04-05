@@ -258,9 +258,39 @@ class BSTStrings {
         	return result;
         }
         
+        private static StringNode findLargest2(StringNode troot) {
+        	StringNode result;
+        	if (troot == null) {
+        		result = null;
+        	} else if (troot.getRight() == null) {
+        		result = troot;
+        	} else {
+        		result = findLargest2(troot.getRight());
+        	}
+        	return result;
+        }
+        
         // Rotate the node containing val to the right – do nothing if not
         // possible.
         public void rotateRight(String s) {
+        	root = rotateRight(root,s);
+        }
+        
+        private static StringNode rotateRight(StringNode troot, String str) {
+        	if (troot == null) {
+        	} else if (troot.getString().equals(str)) {
+        		StringNode replacement = new StringNode(troot.getString(),null,troot.getRight());
+        		StringNode replacement2 = findLargest2(troot.getLeft());
+        		if (replacement2 != null) {	// if troot.getLeft() isn't null, set its left to troot
+        			troot = troot.getLeft();
+        			replacement2.setRight(replacement);
+        		}
+        	} else if (str.compareTo(troot.getString()) > 0) {
+        		troot.setRight(rotateRight(troot.getRight(),str));	
+        	} else {
+        		troot.setLeft(rotateRight(troot.getLeft(),str));
+        	}
+        	return troot;
         }
         public static String myName() {
                 return "Steven Elberger";
