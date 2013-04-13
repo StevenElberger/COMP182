@@ -1,3 +1,8 @@
+/* Steven Elberger
+ * Assignment 5
+ * March 26 - April 16
+ * Description: StringNode represents the nodes in the BSTStrings class. BSTStrings objects represent binary search trees with String values.
+ */
 class StringNode {
         private String word;
         private StringNode left, right;
