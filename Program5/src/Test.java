@@ -21,5 +21,9 @@ public class Test {
 		System.out.println(bstree);
 		bstree.rotateRight("D");
 		System.out.println(bstree);
+		bstree.rotateLeft("A");
+		System.out.println(bstree);
+		bstree.insert("A");
+		System.out.println(bstree);
 	}
 }
