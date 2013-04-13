@@ -138,11 +138,12 @@ class BSTStrings {
         		} else {
         			// Node has two children
         			// Its replacement will be the largest child
-        			StringNode replacement = findLargest(troot);
-        			// Set the replacement's left to root's left
+        			StringNode replacement = findReplacement(troot);
+        			// Set the replacement's left to troot's left
         			replacement.setLeft(troot.getLeft());
         			// Same with right
         			replacement.setRight(troot.getRight());
+        			// Replace troot with the replacement node
         			troot = replacement;
         		}
         	} else if (str.compareTo(troot.getString()) > 0) {
@@ -155,23 +156,28 @@ class BSTStrings {
         	return troot;
         }
         
-        private static StringNode findLargest(StringNode troot) {
+        // Find's replacement node, set's troot's right child to appropriate node
+        private static StringNode findReplacement(StringNode troot) {
         	StringNode result = null;
         	if (troot.getRight().getLeft() == null && troot.getRight().getRight() == null) {
-        		// Right child is a leaf
-        		// Therefore it is the largest
+        		// Found the largest and it is a leaf
+        		// Set troot's right to null
         		result = troot.getRight();
         		troot.setRight(null);
         	} else if (troot.getRight().getLeft() != null && troot.getRight().getRight() == null) {
-        		// 
+        		// Found the largest, but it has a left child
+        		// Set this node's right to the largest node's
+        		// left child
         		result = troot.getRight();
         		troot.setRight(troot.getRight().getLeft());
-        	} else {//if (troot.getRight().getLeft() == null && troot.getRight().getRight() != null) {
-        		findLargest(troot.getRight());
+        	} else {
+        		// Keep searching
+        		findReplacement(troot.getRight());
         	}
         	return result;
         }
         
+        // Find height of the tree
         public int height() {
         	return height(root);
         }
@@ -198,6 +204,7 @@ class BSTStrings {
         	return result;
         }
         
+        // Count number of leaves in tree
         public int leafCt() {
                 return leafCt(root);
         }
@@ -218,38 +225,39 @@ class BSTStrings {
         	return result;
         }
         
-         public int closeLeaf() {
-        	 return closeLeaf(root);
-         }
+        // Number of nodes to closest leaf from root
+        public int closeLeaf() {
+        	return closeLeaf(root);
+        }
          
-         private static int closeLeaf(StringNode troot) {
-        	 int result;
-        	 if (troot == null) {
-        		 result = 0;
-        	 } else if (troot.getLeft() == null && troot.getRight() == null) {
-        		 // Found a leaf
-        		 result = 1;
-        	 } else {
-        		 // Search left and right
-        		 int lf = closeLeaf(troot.getLeft());
-        		 int rt = closeLeaf(troot.getRight());
-        		 // If both sides have values,
-        		 // Return the smallest value
-        		 if (lf > 0 && rt > 0) {
-        			 if (lf < rt) {
-        				 result = lf + 1;
-        			 } else {
-        				 result = rt + 1;
-        			 }
+        private static int closeLeaf(StringNode troot) {
+        	int result;
+        	if (troot == null) {
+        		result = 0;
+        	} else if (troot.getLeft() == null && troot.getRight() == null) {
+        		// Found a leaf
+        		result = 1;
+        	} else {
+        		// Search left and right
+        		int lf = closeLeaf(troot.getLeft());
+        		int rt = closeLeaf(troot.getRight());
+        		// If both sides have values,
+        		// Return the smallest value
+        		if (lf > 0 && rt > 0) {
+        			if (lf < rt) {
+        				result = lf + 1;
+        			} else {
+        				result = rt + 1;
+        			}
         		 // If one side is 0, it's null and shan't
         		 // be counted.
         		 } else if (lf > 0 && rt == 0) {
-        			 result = lf + 1;
+        			result = lf + 1;
         		 } else if (rt > 0 && lf == 0) {
-        			 result = rt + 1;
+        			result = rt + 1;
         		 } else {
         		 // Both are 0
-        			 result = 0;
+        			result = 0;
         		 }
         	 }
         	 return result;
@@ -286,34 +294,6 @@ class BSTStrings {
         	return troot;
         }
         
-        private static StringNode findSmallest(StringNode troot) {
-        	StringNode result;
-        	if (troot == null) {
-        		result = null;
-        	} else if (troot.getLeft() == null) {
-        		// Found the smallest
-        		result = troot;
-        	} else {
-        		// Keep searching
-        		result = findSmallest(troot.getLeft());
-        	}
-        	return result;
-        }
-        
-        private static StringNode findLargest2(StringNode troot) {
-        	StringNode result;
-        	if (troot == null) {
-        		result = null;
-        	} else if (troot.getRight() == null) {
-        		// Found the largest
-        		result = troot;
-        	} else {
-        		// Keep searching
-        		result = findLargest2(troot.getRight());
-        	}
-        	return result;
-        }
-        
         // Rotate the node containing val to the right – do nothing if not
         // possible.
         public void rotateRight(String s) {
@@ -327,7 +307,7 @@ class BSTStrings {
         		// Make a copy of troot
         		// Find the largest node of the left child
         		StringNode copyTroot = new StringNode(troot.getString(),null,troot.getRight());
-        		StringNode largestNode = findLargest2(troot.getLeft());
+        		StringNode largestNode = findLargest(troot.getLeft());
         		// If largest node isn't null, set troot to its left child
         		// Then set the largest node's right to troot
         		if (largestNode != null) {
@@ -342,6 +322,36 @@ class BSTStrings {
         		troot.setLeft(rotateRight(troot.getLeft(),str));
         	}
         	return troot;
+        }
+        
+        // Find the smallest child
+        private static StringNode findSmallest(StringNode troot) {
+        	StringNode result;
+        	if (troot == null) {
+        		result = null;
+        	} else if (troot.getLeft() == null) {
+        		// Found the smallest
+        		result = troot;
+        	} else {
+        		// Keep searching
+        		result = findSmallest(troot.getLeft());
+        	}
+        	return result;
+        }
+        
+        // Find the largest child
+        private static StringNode findLargest(StringNode troot) {
+        	StringNode result;
+        	if (troot == null) {
+        		result = null;
+        	} else if (troot.getRight() == null) {
+        		// Found the largest
+        		result = troot;
+        	} else {
+        		// Keep searching
+        		result = findLargest(troot.getRight());
+        	}
+        	return result;
         }
         
         public static String myName() {
