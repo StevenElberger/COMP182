@@ -1,6 +1,6 @@
 /* Steven Elberger
  * Assignment 5
- * March 26 - April 16
+ * March 26 - April 23
  * Description: StringNode represents the nodes in the BSTStrings class. BSTStrings objects represent binary search trees with String values.
  */
 class StringNode {
@@ -211,7 +211,7 @@ class BSTStrings {
         
         // Count number of leaves in tree
         public int leafCt() {
-                return leafCt(root);
+        	return leafCt(root);
         }
         
         private static int leafCt(StringNode troot) {
@@ -357,6 +357,38 @@ class BSTStrings {
         		result = findLargest(troot.getRight());
         	}
         	return result;
+        }
+        
+        // Remove all leaves from the tree
+        public void remLefs() {
+        	root = remLefs(root);
+        }
+        
+        private static StringNode remLefs(StringNode troot) {
+        	if (troot == null) {
+        	} else if (troot.getLeft() == null && troot.getRight() == null) {
+        		troot = null;
+        	} else {
+        		troot.setLeft(remLefs(troot.getLeft()));
+        		troot.setRight(remLefs(troot.getRight()));
+        	}
+        	return troot;
+        }
+        
+        // Return the smallest String whose
+        // reverse is also in the tree.
+        // Return the empty String if there
+        // is no such String
+        public String smallRev() {
+        	return "Hello";
+        }
+        
+        private static String revString(String s) {
+        	String rtn = "";
+        	for (int i = 0; i < s.length(); i++) {
+        		rtn = s.charAt(i) + rtn;
+        	}
+        	return rtn;
         }
         
         public static String myName() {

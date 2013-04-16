@@ -25,5 +25,7 @@ public class Test {
 		System.out.println(bstree);
 		bstree.insert("A");
 		System.out.println(bstree);
+		bstree.remLefs();
+		System.out.println(bstree);
 	}
 }
