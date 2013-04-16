@@ -380,9 +380,31 @@ class BSTStrings {
         // Return the empty String if there
         // is no such String
         public String smallRev() {
-        	return "Hello";
+        	return smallRev(root);
         }
         
+        // Needs work!
+        private static String smallRev(StringNode troot) {
+        	String result;
+        	if (troot == null) {
+        		result = "";
+        	} else if (search(troot, revString(troot.getString()))) {
+        		result = troot.getString();
+        	} else {
+        		String left = smallRev(troot.getLeft());
+        		String right = smallRev(troot.getRight());
+        		if (left != null) {
+        			result = left;
+        		} else if (right != null) {
+        			result = right;
+        		} else {
+        			result = "";
+        		}
+        	}
+        	return result;
+        }
+        
+        // Returns the reverse of a String
         private static String revString(String s) {
         	String rtn = "";
         	for (int i = 0; i < s.length(); i++) {
