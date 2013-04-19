@@ -27,5 +27,26 @@ public class Test {
 		System.out.println(bstree);
 		bstree.remLefs();
 		System.out.println(bstree);
+		bstree.delete("G");
+		System.out.println(bstree);
+		bstree.delete("D");
+		System.out.println(bstree);
+		bstree.delete("N");
+		System.out.println(bstree);
+		bstree.insert("DE");
+		System.out.println(bstree);
+		bstree.insert("BE");
+		System.out.println(bstree);
+		bstree.insert("AE");
+		System.out.println(bstree);
+		bstree.insert("CE");
+		System.out.println(bstree);
+		bstree.insert("EBB");
+		System.out.println(bstree);
+		bstree.insert("EA");
+		System.out.println(bstree);
+		bstree.insert("EC");
+		System.out.println(bstree);
+		System.out.println(bstree.smallRev());
 	}
 }

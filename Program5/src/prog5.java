@@ -380,25 +380,22 @@ class BSTStrings {
         // Return the empty String if there
         // is no such String
         public String smallRev() {
-        	return smallRev(root);
+        	return smallRev(root,root);
         }
         
-        // Needs work!
-        private static String smallRev(StringNode troot) {
+        private static String smallRev(StringNode troot, StringNode root) {
         	String result;
         	if (troot == null) {
         		result = "";
-        	} else if (search(troot, revString(troot.getString()))) {
+        	} else if (search(root, revString(troot.getString()))) {
         		result = troot.getString();
         	} else {
-        		String left = smallRev(troot.getLeft());
-        		String right = smallRev(troot.getRight());
-        		if (left != null) {
+        		String left = smallRev(troot.getLeft(),root);
+        		String right = smallRev(troot.getRight(),root);
+        		if (!left.equals("")) {
         			result = left;
-        		} else if (right != null) {
-        			result = right;
         		} else {
-        			result = "";
+        			result = right;
         		}
         	}
         	return result;
