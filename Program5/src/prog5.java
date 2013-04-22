@@ -360,17 +360,17 @@ class BSTStrings {
         }
         
         // Remove all leaves from the tree
-        public void remLefs() {
-        	root = remLefs(root);
+        public void remLfs() {
+        	root = remLfs(root);
         }
         
-        private static StringNode remLefs(StringNode troot) {
+        private static StringNode remLfs(StringNode troot) {
         	if (troot == null) {
         	} else if (troot.getLeft() == null && troot.getRight() == null) {
         		troot = null;
         	} else {
-        		troot.setLeft(remLefs(troot.getLeft()));
-        		troot.setRight(remLefs(troot.getRight()));
+        		troot.setLeft(remLfs(troot.getLeft()));
+        		troot.setRight(remLfs(troot.getRight()));
         	}
         	return troot;
         }
