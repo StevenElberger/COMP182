@@ -142,14 +142,13 @@ class BSTStrings {
         			troot = null;
         		} else {
         			// Node has two children
-        			// Its replacement will be the largest child
-        			StringNode replacement = findReplacement(troot);
-        			// Set the replacement's left to troot's left
-        			replacement.setLeft(troot.getLeft());
-        			// Same with right
-        			replacement.setRight(troot.getRight());
-        			// Replace troot with the replacement node
-        			troot = replacement;
+        			// Save predecessor node's String
+        			// Delete predecessor node
+        			// Create replacement node and point troot to it
+        			String predecessorString = findLargest(troot.getLeft()).getString();
+        			delete(troot, findLargest(troot.getLeft()).getString());
+        			StringNode replacement = new StringNode(predecessorString, troot.getLeft(), troot.getRight());
+        			troot = replacement; 			
         		}
         	} else if (str.compareTo(troot.getString()) > 0) {
         		// String is greater than this node's String, go right
@@ -159,27 +158,6 @@ class BSTStrings {
         		troot.setLeft(delete(troot.getLeft(),str));
         	}
         	return troot;
-        }
-        
-        // Find's replacement node, set's troot's right child to appropriate node
-        private static StringNode findReplacement(StringNode troot) {
-        	StringNode result = null;
-        	if (troot.getRight().getLeft() == null && troot.getRight().getRight() == null) {
-        		// Found the largest and it is a leaf
-        		// Set troot's right to null
-        		result = troot.getRight();
-        		troot.setRight(null);
-        	} else if (troot.getRight().getLeft() != null && troot.getRight().getRight() == null) {
-        		// Found the largest, but it has a left child
-        		// Set this node's right to the largest node's
-        		// left child
-        		result = troot.getRight();
-        		troot.setRight(troot.getRight().getLeft());
-        	} else {
-        		// Keep searching
-        		findReplacement(troot.getRight());
-        	}
-        	return result;
         }
         
         // Find height of the tree
@@ -278,16 +256,14 @@ class BSTStrings {
         private static StringNode rotateLeft(StringNode troot, String str) {
         	if (troot == null) {
         	} else if (troot.getString().equals(str)) {
-        		// Found the node we need to rotate
-        		// Make a copy of troot
-        		// Find the smallest node of the right child
-        		StringNode copyTroot = new StringNode(troot.getString(),troot.getLeft(),null);
-        		StringNode smallestNode = findSmallest(troot.getRight());
-        		// If smallest node isn't null, set troot to its right child
-        		// Then set the smallest node's left to troot
-        		if (smallestNode != null) {
-        			troot = troot.getRight();
-        			smallestNode.setLeft(copyTroot);
+        		// If we can rotate, create a pivot node
+        		// Set treeroot's right to pivot's left
+        		// Set pivot's left to treeroot and rotate
+        		if (troot.getRight() != null) {
+        			StringNode pivot = troot.getRight();
+            		troot.setRight(pivot.getLeft());
+            		pivot.setLeft(troot);
+            		troot = pivot;
         		}
         	} else if (str.compareTo(troot.getString()) > 0) {
         		// If String is greater than this node's String, go right
@@ -308,16 +284,14 @@ class BSTStrings {
         private static StringNode rotateRight(StringNode troot, String str) {
         	if (troot == null) {
         	} else if (troot.getString().equals(str)) {
-        		// Found the node we need to rotate
-        		// Make a copy of troot
-        		// Find the largest node of the left child
-        		StringNode copyTroot = new StringNode(troot.getString(),null,troot.getRight());
-        		StringNode largestNode = findLargest(troot.getLeft());
-        		// If largest node isn't null, set troot to its left child
-        		// Then set the largest node's right to troot
-        		if (largestNode != null) {
-        			troot = troot.getLeft();
-        			largestNode.setRight(copyTroot);
+        		// If we can rotate, create a pivot node
+        		// Set treeroot's left to pivot's right
+        		// Set pivot's right to treeroot and rotate
+        		if (troot.getLeft() != null) {
+        			StringNode pivot = troot.getLeft();
+            		troot.setLeft(pivot.getRight());
+            		pivot.setRight(troot);
+            		troot = pivot;
         		}
         	} else if (str.compareTo(troot.getString()) > 0) {
         		// If String is greater than this node's String, go right
@@ -328,22 +302,7 @@ class BSTStrings {
         	}
         	return troot;
         }
-        
-        // Find the smallest child
-        private static StringNode findSmallest(StringNode troot) {
-        	StringNode result;
-        	if (troot == null) {
-        		result = null;
-        	} else if (troot.getLeft() == null) {
-        		// Found the smallest
-        		result = troot;
-        	} else {
-        		// Keep searching
-        		result = findSmallest(troot.getLeft());
-        	}
-        	return result;
-        }
-        
+
         // Find the largest child
         private static StringNode findLargest(StringNode troot) {
         	StringNode result;
@@ -388,7 +347,12 @@ class BSTStrings {
             if (temproot == null) {
                 result = "";
             } else if (search(root, revString(temproot.getString()))) {
-                result = temproot.getString();
+                String left = smallRev(temproot.getLeft(),root);
+                if (!left.equals("")) {
+                	result = left;
+                } else {
+                	result = temproot.getString();
+                }
             } else {
                 String left = smallRev(temproot.getLeft(),root);
                 String right = smallRev(temproot.getRight(),root);
