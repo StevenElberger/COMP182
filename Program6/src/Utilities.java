@@ -58,14 +58,15 @@ class Utilities {
 					System.out.println("E");
 					if (!s.empty()) {
 						// advance the element that is currently on top of the stack
+						outputStack(s,goal,index);
+						System.out.println("F1");
+						int top = s.top();
 						s.pop();
-						goal += a[index-1];
+						goal += a[top];
+						s.push(top + 1);
+						goal -= a[top + 1];
 						outputStack(s,goal,index);
-						System.out.println("F");
-						s.push(index);
-						goal -= a[index];
-						outputStack(s,goal,index);
-						System.out.println("G");
+						System.out.println("F2");
 					}
 				}
 			}
