@@ -8,6 +8,6 @@ public class Test {
 		array[3] = 3;
 		array[4] = 7;
 		
-		System.out.println(Utilities.subsetSum(array,5,18));
+		System.out.println(Utilities.subsetSum(array,5,12));
 	}
 }
