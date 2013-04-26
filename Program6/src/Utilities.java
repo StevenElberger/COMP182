@@ -71,6 +71,12 @@ class Utilities {
 				}
 			}
 		}
+		if (!s.empty()) {
+			while (!s.empty()) {
+				System.out.print(a[s.top()] + " ");
+				s.pop();
+			}
+		}
 		System.out.println();
 		return goal == 0;
 	}
