@@ -33,22 +33,13 @@ class Utilities {
 						// advance the element that is currently on top of the stack
 						outputStack(s,goal,index);
 						System.out.println("C1");
-						index = s.top();
+						int top = s.top();
 						s.pop();
-						goal += a[index];
-						//s.pop();
-						//goal += a[index-2];
+						goal += a[top];
+						s.push(top + 1);
+						goal -= a[top + 1];
 						outputStack(s,goal,index);
 						System.out.println("C2");
-						if (index > 0) {
-							s.push(index - 1);
-							goal -= a[index - 1];
-						} else {
-							s.push(index + 1);
-							goal -= a[index + 1];
-						}
-						outputStack(s,goal,index);
-						System.out.println("C3");
 						//System.out.println(s.top() + " - " + goal);
 					}
 				}
