@@ -54,7 +54,9 @@ class BSTStrings {
         			result = null;
         		} else {
         			// Copy the String, then recursively set the left and right
-        			result = new StringNode(treeRoot.getString(),copyTree(treeRoot.getLeft()),copyTree(treeRoot.getRight()));
+        			result = new StringNode(treeRoot.getString(),
+        					copyTree(treeRoot.getLeft()),
+        					copyTree(treeRoot.getRight()));
         		}
                 return result;
         }
@@ -146,9 +148,11 @@ class BSTStrings {
         			// Save predecessor node's String
         			// Delete predecessor node
         			// Create replacement node and point treeRoot to it
-        			String predecessorString = findLargest(treeRoot.getLeft()).getString();
+        			String predString = findLargest(treeRoot.getLeft()).getString();
         			delete(treeRoot, findLargest(treeRoot.getLeft()).getString());
-        			StringNode replacement = new StringNode(predecessorString, treeRoot.getLeft(), treeRoot.getRight());
+        			StringNode replacement = new StringNode(predString, 
+        					treeRoot.getLeft(), 
+        					treeRoot.getRight());
         			treeRoot = replacement; 			
         		}
         	} else if (str.compareTo(treeRoot.getString()) > 0) {
@@ -340,7 +344,7 @@ class BSTStrings {
         // Return the empty String if there
         // is no such String
         public String smallRev() {
-            return smallRev(root, root); // <--- This is bad and I should feel bad
+            return smallRev(root, root); // Better way to do this?
         }
 
         private static String smallRev(StringNode temproot, StringNode root) { 
