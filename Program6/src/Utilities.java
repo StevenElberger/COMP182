@@ -10,37 +10,26 @@ class Utilities {
 		while (goal != 0 && !s.empty()) {
 			// The index is the last item to be put on the stack
 			index = s.top();
-			outputStack(s,goal,index);
-			System.out.println("New Loop");
 			if (goal < 0) {		// The sum is too much!
 				// Remove whatever was last on the stack because
 				// it sent us over the goal
 				s.pop();
 				// Restore goal back to what it was before we pushed that index on
 				goal += a[index];
-				outputStack(s,goal,index);
-				System.out.println("A");
 				// If we're not at the last element in the array
 				if (index < n-1) {
 					// Let's try the next element in the array!
 					s.push(index + 1);
 					goal -= a[index + 1];
-					outputStack(s,goal,index);
-					System.out.println("B");
 				} else {
 					// We need to advance the element on s.top()
 					if (!s.empty()) {
 						// advance the element that is currently on top of the stack
-						outputStack(s,goal,index);
-						System.out.println("C1");
 						int top = s.top();
 						s.pop();
 						goal += a[top];
 						s.push(top + 1);
 						goal -= a[top + 1];
-						outputStack(s,goal,index);
-						System.out.println("C2");
-						//System.out.println(s.top() + " - " + goal);
 					}
 				}
 			} else {	// We're still good... Keep adding!
@@ -48,25 +37,17 @@ class Utilities {
 					// Try the next index!
 					s.push(index + 1);
 					goal -= a[index + 1];
-					outputStack(s,goal,index);
-					System.out.println("D");
 				} else {	// We've reached the last index!
 					// Pop it off!
 					s.pop();
 					goal += a[index];
-					outputStack(s,goal,index);
-					System.out.println("E");
 					if (!s.empty()) {
 						// advance the element that is currently on top of the stack
-						outputStack(s,goal,index);
-						System.out.println("F1");
 						int top = s.top();
 						s.pop();
 						goal += a[top];
 						s.push(top + 1);
 						goal -= a[top + 1];
-						outputStack(s,goal,index);
-						System.out.println("F2");
 					}
 				}
 			}
@@ -79,6 +60,22 @@ class Utilities {
 		}
 		System.out.println();
 		return goal == 0;
+	}
+	
+	public boolean subsetSumR(int[] a, int goal) {
+		return subsetSumR(a,a.length,goal);
+	}
+	
+	private static boolean subsetSumR(int[] a, int n, int goal) {
+		boolean result;
+		if (goal == 0) {
+			result = true;
+		} else if (goal < 0) {
+			result = false;
+		} else {
+			result = false;
+		}
+		return result;
 	}
 	
 	public static void outputStack(IntStack stackA, int g, int ind) {
