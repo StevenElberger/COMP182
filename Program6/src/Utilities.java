@@ -62,22 +62,6 @@ class Utilities {
 		return goal == 0;
 	}
 	
-	public boolean subsetSumR(int[] a, int goal) {
-		return subsetSumR(a,a.length,goal);
-	}
-	
-	private static boolean subsetSumR(int[] a, int n, int goal) {
-		boolean result;
-		if (goal == 0) {
-			result = true;
-		} else if (goal < 0) {
-			result = false;
-		} else {
-			result = false;
-		}
-		return result;
-	}
-	
 	public static void outputStack(IntStack stackA, int g, int ind) {
 		IntStack b = new IntStack();
 		if (!stackA.empty()) {
