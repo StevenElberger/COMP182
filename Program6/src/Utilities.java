@@ -1,16 +1,17 @@
 class Utilities {
-	// n = # elements in a
+	// This method searches for a subset of integers in the array a with n elements
+	// that has the sum goal.
 	public static boolean subsetSum(int[] a, int n, int goal) {
 		IntStack s = new IntStack();
 		int index;	// Index of which number in the array is on the bottom of the stack
 		s.push(0);	// Stack only holds array indices, NOT values!
-		goal -= a[0];
+		goal -= a[0];	// Start with the first element in the array.
 		// If goal == 0, we've found the subset sum
-		// If stack is empty, ...
+		// If stack is empty, stop!
 		while (goal != 0 && !s.empty()) {
 			// The index is the last item to be put on the stack
 			index = s.top();
-			if (goal < 0) {		// The sum is too much!
+			if (goal < 0) {		// The sum more than goal
 				// Remove whatever was last on the stack because
 				// it sent us over the goal
 				s.pop();
@@ -52,6 +53,7 @@ class Utilities {
 				}
 			}
 		}
+		// Output the elements that add up to goal
 		if (!s.empty()) {
 			while (!s.empty()) {
 				System.out.print(a[s.top()] + " ");
@@ -80,19 +82,20 @@ class Utilities {
 }
 
 class IntStack {
-	int[] sArray;
-	int topIndex;
+	int[] sArray;	// the array that represents the stack
+	int topIndex;	// the top of the stack
 	
 	public IntStack() {
-		sArray = new int[50];
-		topIndex = -1;
+		sArray = new int[50];	// limit for our array is 50
+		topIndex = -1;			// need to start off with -1 when empty
 	}
 	
 	public int top() {
-		return sArray[topIndex];
+		return sArray[topIndex]; // Show us the top of the stack
 	}
 	
 	public void pop() {
+		// As long as the stack isn't empty, take this element off the stack
 		if (topIndex > -1) {
 			topIndex--;
 		}
@@ -103,6 +106,7 @@ class IntStack {
 	}
 	
 	public void push(int x) {
+		// If the stack isn't full, add this integer to the stack
 		if (topIndex < 50) {
 			topIndex++;
 			sArray[topIndex] = x;
